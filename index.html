@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoorStitch - Trusted Tailors Delivered to Your Doorstep</title>
+    <style>
+        :root {
+            --color-primary: #DC143C;
+            --color-primary-hover: #B8112E;
+            --color-primary-active: #9B0E26;
+            --color-white: #FFFFFF;
+            --color-cream: #FFF8F0;
+            --color-text: #1F2121;
+            --color-text-secondary: #626C71;
+            --color-border: rgba(220, 20, 60, 0.2);
+            --color-bg-light: rgba(220, 20, 60, 0.05);
+            --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-base: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background: var(--color-cream);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--color-white);
+            box-shadow: var(--shadow-sm);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-logo-img {
+            max-width: 300px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--color-primary);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 60px 0;
+            background: var(--color-white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: var(--color-primary);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px;
+            background: var(--color-bg-light);
+            border-radius: var(--radius-base);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+            color: var(--color-primary);
+        }
+
+        /* Tailors Section */
+        .tailors-section {
+            padding: 60px 0;
+        }
+
+        .tailors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tailor-card {
+            background: var(--color-white);
+            border-radius: var(--radius-base);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tailor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-primary);
+        }
+
+        .tailor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .tailor-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+        }
+
+        .tailor-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 18px;
+            color: #FFD700;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 12px;
+        }
+
+        .badge-expert {
+            background: rgba(220, 20, 60, 0.1);
+            color: var(--color-primary);
+        }
+
+        .badge-verified {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22C55E;
+        }
+
+        .badge-trending {
+            background: rgba(249, 115, 22, 0.1);
+            color: #F97316;
+        }
+
+        .tailor-info {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .availability {
+            margin-top: 16px;
+            padding: 12px;
+            background: var(--color-bg-light);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--color-white);
+            border-radius: var(--radius-base);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: var(--color-primary);
+            font-size: 28px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 32px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .profile-section h3 {
+            color: var(--color-primary);
+            margin-bottom: 16px;
+            font-size: 20px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--color-bg-light);
+            padding: 150px 16px 16px;
+        }
+
+        .portfolio-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .like-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .like-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .like-btn.liked {
+            color: var(--color-primary);
+        }
+
+        .like-count {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .request-btn {
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .reviews-section {
+            margin-top: 30px;
+        }
+
+        .review {
+            background: var(--color-bg-light);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .review-rating {
+            color: #FFD700;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22C55E;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .tailors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-buttons {
+                flex-direction: column;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hidden honeypot field */
+        .hp-field {
+            position: absolute;
+            left: -9999px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">DoorStitch</div>
+                <div class="header-buttons">
+                    <button class="btn btn-primary" onclick="openCustomerModal()">Find a Tailor</button>
+                    <button class="btn btn-outline" onclick="openTailorModal()">Become a Tailor</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <!-- Add your logo image here: <img src="your-logo.jpg" alt="DoorStitch Logo" class="hero-logo-img"> -->
+            <h1>Your Dream Outfit is Just a Few Clicks Away</h1>
+            <p>Trusted tailors, delivered to your doorstep</p>
+            <button class="btn btn-primary" onclick="document.getElementById('tailors').scrollIntoView({behavior: 'smooth'})">Browse Tailors</button>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Find a Tailor</h3>
+                    <p>Browse verified tailors in your area with ratings and reviews</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Select Design</h3>
+                    <p>Choose from their portfolio or send your own design</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Track Progress</h3>
+                    <p>Real-time updates on your order status</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Delivery</h3>
+                    <p>We handle pickup from you and delivery back to your doorstep</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tailors -->
+    <section class="tailors-section" id="tailors">
+        <div class="container">
+            <h2 class="section-title">Featured Tailors</h2>
+            <div class="tailors-grid" id="tailorsGrid">
+                <!-- Tailors will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Registration Modal -->
+    <div class="modal" id="customerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Customer Registration</h2>
+                <button class="close-btn" onclick="closeModal('customerModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message" id="customerSuccess">
+                    ✓ Registration successful! We'll contact you soon.
+                </div>
+                <form action="https://formsubmit.co/doorstitchcustomerdetails@gmail.com" method="POST" id="customerForm">
+                    <input type="hidden" name="_subject" value="New Customer Registration - DoorStitch">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" class="hp-field">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" name="location" class="form-control" placeholder="City, Area" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tailor Registration Modal -->
+    <div class="modal" id="tailorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tailor Registration</h2>
+                <button class="close-btn" onclick="closeModal('tailorModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message" id="tailorSuccess">
+                    ✓ Application submitted! We'll review and contact you within 24 hours.
+                </div>
+                <form action="https://formsubmit.co/doorstitchtailordetails@gmail.com" method="POST" id="tailorForm">
+                    <input type="hidden" name="_subject" value="New Tailor Registration - DoorStitch">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" class="hp-field">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <input type="text" name="address" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Years of Experience</label>
+                        <input type="number" name="experience" class="form-control" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Expertise Level</label>
+                        <select name="expertise" class="form-control" required>
+                            <option value="">Select Level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tell us about your specializations</label>
+                        <textarea name="introduction" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tailor Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="profileName">Tailor Profile</h2>
+                <button class="close-btn" onclick="closeModal('profileModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-section">
+                    <div id="profileDetails"></div>
+                </div>
+
+                <div class="profile-section">
+                    <h3>Portfolio</h3>
+                    <div class="portfolio-grid" id="portfolioGrid"></div>
+                </div>
+
+                <div class="profile-section reviews-section">
+                    <h3>Customer Reviews</h3>
+                    <button class="btn btn-outline" onclick="openReviewForm()" style="margin-bottom: 20px;">Write a Review</button>
+                    <div id="reviewsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Write a Review</h2>
+                <button class="close-btn" onclick="closeModal('reviewModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message" id="reviewSuccess">
+                    ✓ Thank you for your review! It helps others find great tailors.
+                </div>
+                <form action="https://formsubmit.co/doorstitchcustomerdetails@gmail.com" method="POST" id="reviewForm">
+                    <input type="hidden" name="_subject" value="New Customer Review - DoorStitch">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" class="hp-field">
+                    <input type="hidden" name="tailor_name" id="reviewTailorName">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tailor</label>
+                        <p style="color: var(--color-text-secondary);" id="reviewTailorDisplay"></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" name="customer_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Rating</label>
+                        <select name="rating" class="form-control" required>
+                            <option value="">Select Rating</option>
+                            <option value="5">★★★★★ (5 stars - Excellent)</option>
+                            <option value="4">★★★★☆ (4 stars - Very Good)</option>
+                            <option value="3">★★★☆☆ (3 stars - Good)</option>
+                            <option value="2">★★☆☆☆ (2 stars - Fair)</option>
+                            <option value="1">★☆☆☆☆ (1 star - Poor)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Your Review</label>
+                        <textarea name="review_comment" class="form-control" placeholder="Share your experience with this tailor..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Design Request Modal -->
+    <div class="modal" id="requestModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Request Design</h2>
+                <button class="close-btn" onclick="closeModal('requestModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message" id="requestSuccess">
+                    ✓ Request sent! The tailor will review and we'll contact you soon.
+                </div>
+                <form action="https://formsubmit.co/doorstitchcustomerdetails@gmail.com" method="POST" id="requestForm">
+                    <input type="hidden" name="_subject" value="New Design Request - DoorStitch">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" class="hp-field">
+                    <input type="hidden" name="design_name" id="requestDesignName">
+                    <input type="hidden" name="tailor_name" id="requestTailorName">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" name="customer_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Design Details</label>
+                        <p style="color: var(--color-text-secondary); margin-bottom: 8px;">Design: <span id="requestDesignDisplay"></span></p>
+                        <p style="color: var(--color-text-secondary); margin-bottom: 8px;">Tailor: <span id="requestTailorDisplay"></span></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Additional Notes / Customizations</label>
+                        <textarea name="notes" class="form-control" placeholder="Any specific requirements or modifications..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample Data
+        const tailorsData = [
+            {
+                id: 1,
+                name: "D. Nagalaxmi",
+                rating: 5,
+                badges: ["Expert", "Verified"],
+                info: "Can stitch frocks, blouses, chudidars, embroidery work • Max time: 1-2 days • L.B. Nagar, Hyderabad",
+                availability: "Available for 2 more orders",
+                portfolio: [
+                    { id: 1, name: "Designer Blouse", likes: 45 },
+                    { id: 2, name: "Embroidered Saree", likes: 62 },
+                    { id: 3, name: "Party Wear Frock", likes: 38 },
+                    { id: 4, name: "Traditional Lehenga", likes: 55 },
+                    { id: 5, name: "Casual Kurti", likes: 29 },
+                    { id: 6, name: "Bridal Blouse", likes: 71 }
+                ],
+                reviews: [
+                    { name: "Priya Sharma", rating: 5, comment: "Excellent work! Very detailed embroidery." },
+                    { name: "Anita Reddy", rating: 5, comment: "Perfect fit and fast delivery. Highly recommended!" },
+                    { name: "Kavya Singh", rating: 4, comment: "Good quality stitching. Will order again." }
+                ]
+            },
+            {
+                id: 2,
+                name: "GopiKrishnan",
+                rating: 5,
+                badges: ["Trending", "Fast Stitching"],
+                info: "Can stitch men and women clothes • Can even stitch in 2 hours! • Banjara Hills, Hyderabad",
+                availability: "Available for 3 more orders",
+                portfolio: [
+                    { id: 1, name: "Men's Kurta", likes: 34 },
+                    { id: 2, name: "Women's Salwar", likes: 48 },
+                    { id: 3, name: "Kids Dress", likes: 27 },
+                    { id: 4, name: "Formal Shirt", likes: 41 },
+                    { id: 5, name: "Traditional Dhoti", likes: 19 },
+                    { id: 6, name: "Party Wear Gown", likes: 56 }
+                ],
+                reviews: [
+                    { name: "Rajesh Kumar", rating: 5, comment: "Super fast service! Got my kurta in 2 hours." },
+                    { name: "Meena Desai", rating: 5, comment: "Amazing quality and speed. Highly professional." },
+                    { name: "Suresh Babu", rating: 4, comment: "Good work, will recommend to friends." }
+                ]
+            },
+            {
+                id: 3,
+                name: "Shalini Reddy",
+                rating: 5,
+                badges: ["Expert", "Verified", "Fast Stitching"],
+                info: "Specializes in party wear and designer blouses • Max time: 2-3 days • Jubilee Hills, Hyderabad",
+                availability: "Available for 1 more order",
+                portfolio: [
+                    { id: 1, name: "Sequin Blouse", likes: 89 },
+                    { id: 2, name: "Party Gown", likes: 76 },
+                    { id: 3, name: "Designer Saree", likes: 94 },
+                    { id: 4, name: "Wedding Dress", likes: 102 },
+                    { id: 5, name: "Evening Gown", likes: 67 },
+                    { id: 6, name: "Cocktail Dress", likes: 81 }
+                ],
+                reviews: [
+                    { name: "Divya Patel", rating: 5, comment: "Best designer blouses in Hyderabad!" },
+                    { name: "Sneha Iyer", rating: 5, comment: "Stunning work on my wedding dress. Thank you!" },
+                    { name: "Lakshmi Menon", rating: 5, comment: "Creative designs and perfect execution." }
+                ]
+            }
+        ];
+
+        let currentTailor = null;
+        let likedDesigns = {};
+
+        // Load Tailors
+        function loadTailors() {
+            const grid = document.getElementById('tailorsGrid');
+            grid.innerHTML = tailorsData.map(tailor => `
+                <div class="tailor-card" onclick="openProfile(${tailor.id})">
+                    <div class="tailor-header">
+                        <div>
+                            <div class="tailor-name">${tailor.name}</div>
+                            <div class="tailor-rating">${'★'.repeat(tailor.rating)}</div>
+                        </div>
+                    </div>
+                    <div>
+                        ${tailor.badges.map(badge => `
+                            <span class="badge badge-${badge.toLowerCase().replace(' ', '-')}">${badge}</span>
+                        `).join('')}
+                    </div>
+                    <div class="tailor-info">${tailor.info}</div>
+                    <div class="availability">${tailor.availability}</div>
+                </div>
+            `).join('');
+        }
+
+        // Open Profile
+        function openProfile(tailorId) {
+            currentTailor = tailorsData.find(t => t.id === tailorId);
+            document.getElementById('profileName').textContent = currentTailor.name;
+            document.getElementById('reviewTailorName').value = currentTailor.name;
+            document.getElementById('reviewTailorDisplay').textContent = currentTailor.name;
+            
+            document.getElementById('profileDetails').innerHTML = `
+                <div class="tailor-rating" style="font-size: 24px; margin-bottom: 12px;">${'★'.repeat(currentTailor.rating)}</div>
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">${currentTailor.info}</p>
+                <div class="availability">${currentTailor.availability}</div>
+            `;
+
+            // Load Portfolio
+            document.getElementById('portfolioGrid').innerHTML = currentTailor.portfolio.map(design => {
+                const isLiked = likedDesigns[`${tailorId}-${design.id}`] || false;
+                return `
+                    <div class="portfolio-item">
+                        <div class="portfolio-item-header">
+                            <div>
+                                <strong>${design.name}</strong>
+                                <div class="like-count">${design.likes + (isLiked ? 1 : 0)} likes</div>
+                            </div>
+                            <button class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(event, ${tailorId}, ${design.id})">
+                                ${isLiked ? '❤️' : '🤍'}
+                            </button>
+                        </div>
+                        <button class="btn btn-primary request-btn" onclick="openRequestModal(event, '${design.name}', '${currentTailor.name}')">
+                            Request This Design
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            // Load Reviews
+            document.getElementById('reviewsList').innerHTML = currentTailor.reviews.map(review => `
+                <div class="review">
+                    <div class="review-header">
+                        <div class="reviewer-name">${review.name}</div>
+                        <div class="review-rating">${'★'.repeat(review.rating)}</div>
+                    </div>
+                    <p>${review.comment}</p>
+                </div>
+            `).join('');
+
+            openModal('profileModal');
+        }
+
+        // Toggle Like
+        function toggleLike(event, tailorId, designId) {
+            event.stopPropagation();
+            const key = `${tailorId}-${designId}`;
+            likedDesigns[key] = !likedDesigns[key];
+            openProfile(tailorId);
+        }
+
+        // Open Request Modal
+        function openRequestModal(event, designName, tailorName) {
+            event.stopPropagation();
+            document.getElementById('requestDesignName').value = designName;
+            document.getElementById('requestTailorName').value = tailorName;
+            document.getElementById('requestDesignDisplay').textContent = designName;
+            document.getElementById('requestTailorDisplay').textContent = tailorName;
+            openModal('requestModal');
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function openCustomerModal() {
+            openModal('customerModal');
+        }
+
+        function openTailorModal() {
+            openModal('tailorModal');
+        }
+
+        function openReviewForm() {
+            openModal('reviewModal');
+        }
+
+        // Form Submissions
+        document.getElementById('customerForm').addEventListener('submit', function(e) {
+            setTimeout(() => {
+                document.getElementById('customerSuccess').classList.add('active');
+                this.reset();
+            }, 1000);
+        });
+
+        document.getElementById('tailorForm').addEventListener('submit', function(e) {
+            setTimeout(() => {
+                document.getElementById('tailorSuccess').classList.add('active');
+                this.reset();
+            }, 1000);
+        });
+
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            setTimeout(() => {
+                document.getElementById('requestSuccess').classList.add('active');
+                this.reset();
+            }, 1000);
+        });
+
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            setTimeout(() => {
+                document.getElementById('reviewSuccess').classList.add('active');
+                this.reset();
+            }, 1000);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        });
+
+        // Initialize
+        loadTailors();
+    </script>
+</body>
+</html>
