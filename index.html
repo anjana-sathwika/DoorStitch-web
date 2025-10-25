@@ -481,7 +481,90 @@
             position: absolute;
             left: -9999px;
         }
+        .secondary-navbar {
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    padding: 10px 0;
+    margin-bottom: 0;
+}
+.secondary-navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+.nav-links li {
+    position: relative;
+}
+.nav-links a {
+    font-size: 18px;
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.nav-links a:hover { background: var(--color-bg-light);}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    min-width: 160px;
+    z-index: 100;
+    border-radius: 8px;
+}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown-content a {
+    color: var(--color-primary);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover { background: var(--color-bg-light);}
+.user-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%; cursor:pointer;
+}
+.user-menu { position: relative;}
+.user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0; top: 46px;
+    background: var(--color-white);
+    min-width: 180px;
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+    z-index: 101;
+}
+.user-dropdown a {
+    display: block; padding: 12px 18px;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+}
+.user-dropdown a:last-child { border-bottom: none;}
+.user-dropdown a:hover {background: var(--color-bg-light);}
+.user-menu.show .user-dropdown {display: block;}
+
     </style>
+    
 </head>
 <body>
     <!-- Header -->
@@ -496,6 +579,41 @@
             </div>
         </div>
     </header>
+    <!-- Secondary Navigation Bar -->
+<nav class="secondary-navbar">
+    <div class="container secondary-navbar-content">
+        <ul class="nav-links">
+            <li><a href="#" onclick="showSection('most-liked')">Most Liked Designs</a></li>
+            <li><a href="#" onclick="showSection('trending-tailors')">Trending Tailors</a></li>
+            <li><a href="#" onclick="showSection('urgent-tailors')">Urgent Tailors</a></li>
+            <li><a href="#" onclick="showSection('ideas-pair-up')">Ideas to Pair Up</a></li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Categories</button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="filterCategory('Dresses')">Dresses</a>
+                        <a href="#" onclick="filterCategory('Blouses')">Blouses</a>
+                        <a href="#" onclick="filterCategory('Embroidery')">Embroidery</a>
+                        <a href="#" onclick="filterCategory('Party Wear')">Party Wear</a>
+                        <a href="#" onclick="filterCategory('Readymade')">Readymade</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="user-menu">
+            <img src="user-icon.png" alt="User" class="user-icon" onclick="openUserMenu()">
+            <div class="user-dropdown" id="userDropdown">
+                <a href="#">My Measurements</a>
+                <a href="#">Liked Designs</a>
+                <a href="#">Wishlist</a>
+                <a href="#">Language Settings</a>
+                <a href="#">My Orders</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
 
     <!-- Hero Section -->
     <section class="hero">
@@ -506,6 +624,15 @@
             <button class="btn btn-primary" onclick="document.getElementById('tailors').scrollIntoView({behavior: 'smooth'})">Browse Tailors</button>
         </div>
     </section>
+    <section class="designs-section" id="most-liked">
+    <div class="container">
+        <h2 class="section-title">Designs</h2>
+        <div class="designs-grid" id="designsGrid">
+            <!-- Designs will be loaded here -->
+        </div>
+    </div>
+</section>
+
 
     <!-- How It Works -->
     <section class="how-it-works">
@@ -761,6 +888,15 @@
     </div>
 
     <script>
+        function showSection(section){
+    // logic to smoothly scroll and show respective design section
+    document.getElementById(section).scrollIntoView({behavior: 'smooth'});
+}
+function filterCategory(category){
+    // logic for filtering designs by selected category (implement later)
+    alert('Filter: ' + category);
+}
+
         // Sample Data
         const tailorsData = [
             {
@@ -978,6 +1114,21 @@
 
         // Initialize
         loadTailors();
+        function openUserMenu() {
+    document.querySelector('.user-menu').classList.toggle('show');
+}
+window.onclick = function(event) {
+    if (!event.target.matches('.user-icon')) {
+        var dropdowns = document.getElementsByClassName("user-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+};
+
     </script>
     <script>
 if ('serviceWorker' in navigator) {
